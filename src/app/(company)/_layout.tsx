@@ -17,6 +17,11 @@ export default function CompanyLayout() {
       }}
     >
       <Tabs.Screen name="home" options={{ title: 'Home', tabBarIcon: tabIcon('home-outline') }} />
+      <Tabs.Screen name="assistant" options={{ title: 'Assistant', tabBarIcon: tabIcon('sparkles-outline') }} />
+      <Tabs.Screen
+        name="setup"
+        options={{ title: 'Setup', href: role === 'company_admin' ? undefined : null, tabBarIcon: tabIcon('construct-outline') }}
+      />
       <Tabs.Screen
         name="team"
         options={{ title: 'Team', href: canSeeTeam ? undefined : null, tabBarIcon: tabIcon('people-outline') }}

@@ -129,4 +129,5 @@ export async function api<T = any>(method: string, path: string, body?: unknown,
 export const get = <T = any>(path: string) => api<T>('GET', path);
 export const post = <T = any>(path: string, body?: unknown, opts?: { auth?: boolean }) => api<T>('POST', path, body ?? {}, opts);
 export const patch = <T = any>(path: string, body: unknown) => api<T>('PATCH', path, body);
+export const put = <T = any>(path: string, body: unknown) => api<T>('PUT', path, body);
 export const del = <T = any>(path: string, body?: unknown) => api<T>('DELETE', path, body);

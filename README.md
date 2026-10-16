@@ -11,6 +11,11 @@ One codebase for **Android, iOS and Web**. Uses Expo SDK 57 (expo 57.0.9) + expo
 * Team *(company admin & manager)* – search, role filter, add / edit / deactivate / reset password / delete users (admin only)
 * Account – profile, company details (admin can edit), subscription, change password, logout
 
+**AI assistant**
+* Register asks for your backend language (optional) – one connector works for all of them, the language only tailors the guide
+* Setup (company admin): progress checklist · download the **connector** zip (ready-made `.env` with your key) · live connector status · step-by-step guide for your stack · review **API tools** (enable, roles, descriptions, read/change/delete) · help documents · AI settings (about, delete switch, hidden fields) · activity log
+* Assistant (everyone): chat in your role's permissions · "connect your software login" once · confirmation card before any change · history
+
 **Super Admin panel**
 * Dashboard – total / paying / trial / expiring (7 days) / expired / suspended companies, users, MRR, companies by plan (cards open the filtered list)
 * Companies – search, status filters, sort by expiry; detail screen with **Extend**, **Change / assign plan** (paid, trial, complimentary, amount, notes, keep remaining days), **Suspend / Activate**, **Delete**, subscription history

@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Pressable, View } from 'react-native';
 import { AuthShell, FormError } from '../../components/auth-shell';
-import { Button, Card, Input, Loading, T } from '../../components/ui';
+import { Button, Card, Chip, Input, Loading, T } from '../../components/ui';
 import { api } from '../../lib/api';
 import { useAuth } from '../../lib/auth';
 import { formatMoney } from '../../lib/format';
+import { STACKS } from '../../lib/stacks';
 import { colors, space } from '../../lib/theme';
 import type { Plan } from '../../lib/types';
 
@@ -12,6 +13,7 @@ export default function Register() {
   const { registerCompany } = useAuth();
   const [plans, setPlans] = useState<Plan[] | null>(null);
   const [planCode, setPlanCode] = useState('starter');
+  const [stack, setStack] = useState<string>('');
   const [f, setF] = useState({ companyName: '', companyPhone: '', adminName: '', email: '', password: '', confirm: '' });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [error, setError] = useState<string | null>(null);
@@ -53,6 +55,7 @@ export default function Register() {
         email: f.email.trim(),
         password: f.password,
         planCode,
+        backendStack: stack || undefined,
       });
     } catch (e: any) {
       setError(e.message);
@@ -69,6 +72,14 @@ export default function Register() {
       <Input label="Work email *" value={f.email} onChangeText={set('email')} autoCapitalize="none" keyboardType="email-address" error={errors.email} hint="This becomes your admin login." />
       <Input label="Password *" value={f.password} onChangeText={set('password')} secure error={errors.password} />
       <Input label="Confirm password *" value={f.confirm} onChangeText={set('confirm')} secure error={errors.confirm} />
+
+      <T variant="label" style={{ marginBottom: 4 }}>Your software's backend (optional)</T>
+      <T variant="small" style={{ marginBottom: 8 }}>We use this to show setup steps for your language. One connector works with every language.</T>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: space.lg }}>
+        {STACKS.map((x) => (
+          <Chip key={x.id} label={x.label} selected={stack === x.id} onPress={() => setStack(stack === x.id ? '' : x.id)} />
+        ))}
+      </View>
 
       <T variant="label" style={{ marginBottom: 8 }}>Choose a plan</T>
       {plans === null ? <Loading /> : plans.map((p) => {

@@ -21,6 +21,7 @@ interface RegisterInput {
   email: string;
   password: string;
   planCode?: string;
+  backendStack?: string;
 }
 
 interface AuthApi extends AuthState {
