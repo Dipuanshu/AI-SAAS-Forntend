@@ -1,0 +1,41 @@
+# AI SaaS – App (Expo / React Native + TypeScript)
+
+One codebase for **Android, iOS and Web**. Uses Expo SDK 58 + expo-router.
+
+## Screens
+
+**Public** – Welcome · Log in (1. search & pick your company → 2. email + password) · Register company (with plan choice, 14-day trial) · Super Admin login
+
+**Company users** (role-aware tabs)
+* Home – greeting, subscription status / days left, expiry warnings, team stats
+* Team *(company admin & manager)* – search, role filter, add / edit / deactivate / reset password / delete users (admin only)
+* Account – profile, company details (admin can edit), subscription, change password, logout
+
+**Super Admin panel**
+* Dashboard – total / paying / trial / expiring (7 days) / expired / suspended companies, users, MRR, companies by plan (cards open the filtered list)
+* Companies – search, status filters, sort by expiry; detail screen with **Extend**, **Change / assign plan** (paid, trial, complimentary, amount, notes, keep remaining days), **Suspend / Activate**, **Delete**, subscription history
+* Plans – create / edit plans, prices, user limit, features
+* Activity – platform audit log
+* Account – change password, logout
+
+## Run
+
+```bash
+cp .env.example .env     # set EXPO_PUBLIC_API_URL
+npm install
+npm run web              # browser  (or: npm start, then press a / i, or scan QR with Expo Go)
+```
+
+`EXPO_PUBLIC_API_URL` must point to the backend ([ai-saas--backend](https://github.com/Dipuanshu/AI-SAAS--Backend)):
+
+| Where the app runs | URL |
+|---|---|
+| Web / iOS simulator | `http://localhost:4000` |
+| Android emulator | `http://10.0.2.2:4000` |
+| Real phone (Expo Go) | `http://<your computer's LAN IP>:4000` |
+
+## Notes
+
+* Tokens are kept in `expo-secure-store` on phones (localStorage on web). The API client refreshes the access token automatically and logs the user out with a message if the company is suspended or the account is disabled.
+* Light theme only for now. Logo / app icon in `assets/images` are Expo placeholders – replace them later.
+* `npm run typecheck` · `npm run build:web` (static export in `dist/`) · store builds via EAS (`npx eas-cli build`).
