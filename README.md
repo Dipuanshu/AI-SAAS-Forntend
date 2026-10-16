@@ -1,6 +1,6 @@
 # AI SaaS – App (Expo / React Native + TypeScript)
 
-One codebase for **Android, iOS and Web**. Uses Expo SDK 58 + expo-router.
+One codebase for **Android, iOS and Web**. Uses Expo SDK 57 (expo 57.0.9) + expo-router.
 
 ## Screens
 
