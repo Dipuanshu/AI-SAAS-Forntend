@@ -1,6 +1,26 @@
+import Constants from 'expo-constants';
+import { Platform } from 'react-native';
 import type { Session } from './types';
 
-export const API_URL = (process.env.EXPO_PUBLIC_API_URL ?? 'http://localhost:4000').replace(/\/$/, '');
+/**
+ * On a phone, "localhost" is the phone itself. While developing, Expo tells the app which computer
+ * served the bundle (hostUri, e.g. 192.168.1.5:8081), so we point "localhost" at that computer instead.
+ */
+export function resolveApiUrl(configured: string, hostUri?: string | null, os: string = Platform.OS): string {
+  const url = configured.replace(/\/$/, '');
+  if (os === 'web') return url;
+  const host = hostUri?.split(':')[0] ?? '';
+  const isLocal = /^https?:\/\/(localhost|127\.0\.0\.1)(?=[:/]|$)/.test(url);
+  if (isLocal && /^\d{1,3}(\.\d{1,3}){3}$/.test(host)) {
+    return url.replace(/\/\/(localhost|127\.0\.0\.1)/, `//${host}`);
+  }
+  return url;
+}
+
+export const API_URL = resolveApiUrl(
+  process.env.EXPO_PUBLIC_API_URL ?? 'http://localhost:4000',
+  Constants.expoConfig?.hostUri ?? (Constants as any).expoGoConfig?.debuggerHost,
+);
 
 export class ApiError extends Error {
   constructor(
