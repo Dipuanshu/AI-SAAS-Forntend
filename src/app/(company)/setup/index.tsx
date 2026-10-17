@@ -83,7 +83,7 @@ export default function Setup() {
       {data ? (
         <>
           {!data.llm.configured ? (
-            <Banner tone="warning" icon="information-circle" title="The AI model is not configured on the server yet" text="The platform owner must set ANTHROPIC_API_KEY in the backend .env. You can still prepare everything below." />
+            <Banner tone="warning" icon="information-circle" title="The AI model is not configured on the server yet" text="The platform owner must set OPENROUTER_API_KEY (free models) or ANTHROPIC_API_KEY in the backend .env. You can still prepare everything below." />
           ) : null}
 
           <Card>

@@ -135,7 +135,7 @@ export default function Assistant() {
 
           <ScrollView ref={scroller} style={{ flex: 1 }} contentContainerStyle={{ padding: space.lg, paddingBottom: space.md, flexGrow: 1 }} keyboardShouldPersistTaps="handled">
             {status && !status.llmConfigured ? (
-              <Banner tone="warning" icon="information-circle" title="The AI model is not set up yet" text="Ask the platform owner to add the AI key on the server." />
+              <Banner tone="warning" icon="information-circle" title="The AI model is not set up yet" text="Ask the platform owner to add an AI key (OpenRouter or Anthropic) on the server." />
             ) : null}
             {status && status.llmConfigured && !status.ready ? (
               <Card>
